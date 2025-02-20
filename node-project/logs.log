@@ -54,3 +54,9 @@ Date - Sat, 15 Feb 2025 17:22:59 GMT | Method - GET | URL - /login | Status - 40
 Date - Sat, 15 Feb 2025 17:23:02 GMT | Method - GET | URL - /log | Status - 404
 Date - Sun, 16 Feb 2025 08:22:03 GMT | Method - GET | URL - /users/reg | Status - 404
 Date - Sun, 16 Feb 2025 08:24:32 GMT | Method - GET | URL - /users/reg | Status - 200
+Date - Thu, 20 Feb 2025 17:22:13 GMT | Method - GET | URL - /Reg | Status - 404
+Date - Thu, 20 Feb 2025 17:24:08 GMT | Method - GET | URL - /Reg | Status - 404
+Date - Thu, 20 Feb 2025 17:24:21 GMT | Method - GET | URL - /users/reg | Status - 200
+Date - Thu, 20 Feb 2025 17:24:28 GMT | Method - POST | URL - /users/reg | Status - 200
+Date - Thu, 20 Feb 2025 17:24:38 GMT | Method - POST | URL - /users/reg | Status - 200
+Date - Thu, 20 Feb 2025 17:24:41 GMT | Method - POST | URL - /users/reg | Status - 200
