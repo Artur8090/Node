@@ -85,6 +85,7 @@ http.createServer(app).listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
 */
+/*
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const http = require('http');
@@ -103,3 +104,27 @@ app.get('/', (req, res) => {
 http.createServer(app).listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
+*/
+const express = require('express');
+
+const http = require('http');
+const app = express();
+const session = require('express-session')
+
+app.use(
+    session({
+        resave: false,
+        saveUninitialized: false,
+        secret: 's'
+    })
+)
+app.get('/counter', function(req, res, next) {
+    if(req.session.counter){
+        req.session.counter++;
+    } else{
+        req.session.counter = 1;
+    }
+    res.status(200).send((req.session.counter.toString()))
+})
+
+app.listen(3000)
