@@ -1,4 +1,4 @@
-const User = require("../models/user")
+const User = require("../models/users")
 
 exports.registerPage = function (req, res) {
 	res.render("register", {
@@ -6,7 +6,23 @@ exports.registerPage = function (req, res) {
 		layout: './layouts/main-layout'
 	});
 }
+exports.authorizationPage = function(req, res){
+	res.render('authorization',{title:'Web-chat'})
+}
+exports.login = async function(req,res){
+	const user = await User.findOne({
+		login: req.body.login, password: req.body.password 
+	})
+	if(user){
+		res.redirect('/')
+	} else{
+		res.render('authorization', {
+			errMessage: 'Incorrect password or username',
+			title: 'Web-chat',
 
+		})
+	}
+}
 exports.addUser = async function(req,res) {
   const user = new User({
 		login: req.body.login,

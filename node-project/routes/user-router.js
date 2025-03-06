@@ -7,4 +7,7 @@ router.post('/reg', userController.addUser);
 
 router.get('/reg', userController.registerPage);
 
+router.get('/authorization',userController.authorizationPage)
+
+router.post('/login', userController.login)
 module.exports = router;
