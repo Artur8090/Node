@@ -1,1 +1,9 @@
 <header><h1><%= title %></h1></header>
+<% if(!user) { %>
+<a href="http://localhost:3000/users/reg">Register</a>
+<a href="http://localhost:3000/users/authorization">Log in</a>
+<% } else {%>
+    <a href="http://localhost:3000/users/logOut">Log out</a>
+    You are <%= user.name %>
+<% } %>
+<a href="#">Chat</a>

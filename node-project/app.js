@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 const regRouter = require('./routes/user-router')
+
 //var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 //
@@ -12,6 +13,16 @@ const fs = require('fs')
 var app = express()
 const config = require('./config')
 // view engine setup
+const session = require('express-session')
+app.use(
+  session({
+    secret: 'webChat2734',
+  })
+)
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -19,6 +30,15 @@ app.use(logger(':date[web] :method :url :status'));
 app.use(logger('dev'));
 const expressLayouts = require('express-ejs-layouts');
 
+const MongoStore = require('connect-mongo')
+app.use(
+  session({
+    secret: 'webChat2734',
+    store: MongoStore.create({
+      mongoUrl: "mongodb://127.0.0.1:27017/webchatdb",
+    })
+  })
+)
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
@@ -71,6 +91,8 @@ app.use(function (err, req, res, next) {
     res.render('error', {layout: './layouts/error-layout'});
   }
 });
+
+
 module.exports = app;
 
 

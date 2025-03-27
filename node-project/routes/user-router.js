@@ -9,5 +9,6 @@ router.get('/reg', userController.registerPage);
 
 router.get('/authorization',userController.authorizationPage)
 
+router.get('/logout', userController.logout)
 router.post('/login', userController.login)
 module.exports = router;

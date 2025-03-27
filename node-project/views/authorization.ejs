@@ -1,12 +1,15 @@
-
 <form action="/users/login" method="post">
-	<% if (typeof errMessage !=='undefined') {%>
-		<span><%= errMessage %></span><br>
+	<% if (typeof errMessage !== 'undefined') { %>
+		<span style="color: red;"><%= errMessage %></span><br>
 	<% } %>
+	
 	<label for="username">Username</label><br>
-	<input type="text" name="login">
+	<input type="text" name="login" value="<%= typeof login !== 'undefined' ? login : '' %>">
 	<br><br>
+	
 	<label for="password">Password</label><br>
-	<input type="password" name="password"><br><br>
+	<input type="password" name="password" value="<%= typeof password !== 'undefined' ? password : '' %>">
+	<br><br>
+	
 	<input type="submit" value="Авторизоватся">
 </form>
