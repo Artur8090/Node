@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 const regRouter = require('./routes/user-router')
-
+const MongoStore = require('connect-mongo')
 //var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 //
@@ -14,11 +14,14 @@ var app = express()
 const config = require('./config')
 // view engine setup
 const session = require('express-session')
-app.use(
-  session({
-    secret: 'webChat2734',
+const sessionMiddleware =  session({
+  secret: 'webChat2734',
+  store: MongoStore.create({
+    mongoUrl: "mongodb://127.0.0.1:27017/webchatdb"
   })
-)
+})
+
+app.use(sessionMiddleware)
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
@@ -30,15 +33,7 @@ app.use(logger(':date[web] :method :url :status'));
 app.use(logger('dev'));
 const expressLayouts = require('express-ejs-layouts');
 
-const MongoStore = require('connect-mongo')
-app.use(
-  session({
-    secret: 'webChat2734',
-    store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/webchatdb",
-    })
-  })
-)
+
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
@@ -47,7 +42,7 @@ app.use(expressLayouts)
 app.set('layout', './layouts/main-layout');
 app.use('/', homeRouter);
 
-//app.use('/users', usersRouter);
+app.use('/users', userRouter);
 
 // catch 404 and forward to error handler
 //app.use(function(req, res, next) {
@@ -72,7 +67,7 @@ app.use("/forbidden", function (req, res, next) {
   next(createError(403,'Ой! Вам сюда нелзя!'))
 })
 app.use(express.urlencoded({ extended: false }));
-app.use('/users', userRouter);
+//app.use('/users', userRouter);
 app.use(function (req, res, next) {
   next(createError(404,'Страница не найдена. Извините :(('))
 });
@@ -93,6 +88,6 @@ app.use(function (err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = {app, sessionMiddleware};
 
 

@@ -9,6 +9,7 @@ exports.registerPage = function (req, res) {
 exports.authorizationPage = function (req, res) {
 	res.render('authorization', { title: 'Web-chat' })
 }
+
 exports.login = async function (req, res) {
 	const { login, password } = req.body;
 
@@ -86,4 +87,6 @@ exports.addUser = async function (req, res) {
         });
     }
 };
-
+exports.chatPage = function (req, res){
+    res.render('chat', {title: 'Web-chat'})
+}

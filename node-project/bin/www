@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../app');
+const {app, sessionMiddleware} = require('../app');
 const debug = require('debug')('web-chat:server');
 const http = require('http');
 const config = require('../config');
@@ -22,9 +22,14 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+const io = require('socket.io')(server)
+io.use(function(socket, next){
+  sessionMiddleware(socket.request, socket.request.res, next)
+})
+io.on('connection', function(socket){
+  const user = socket.request.session.user;
+  console.log('A User Connected')
+})
 
 async function main() {
   // Сначала подключаемся к БД
