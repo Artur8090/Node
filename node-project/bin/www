@@ -28,7 +28,7 @@ io.use(function(socket, next){
 })
 io.on('connection', function(socket){
   const user = socket.request.session.user;
-  console.log('A User Connected')
+  console.log(`A User ${user} Connected`)
 })
 
 async function main() {

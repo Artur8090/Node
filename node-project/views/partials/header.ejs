@@ -1,9 +1,17 @@
-<header><h1><%= title %></h1></header>
-<% if(!user) { %>
-<a href="http://localhost:3000/users/reg">Register</a>
-<a href="http://localhost:3000/users/authorization">Log in</a>
-<% } else {%>
-    <a href="http://localhost:3000/users/logOut">Log out</a>
-    You are <%= user.name %>
-<% } %>
-<a href="http://localhost:3000/users/chat">Chat</a>
+<header>
+    <h1><%= title %></h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <% if (!user) { %>
+          <li><a href="/users/reg">Register</a></li>
+          <li><a href="/users/authorization">Log in</a></li>
+        <% } else { %>
+          <li><a href="/chat">Chat</a></li>
+          <li><a href="/users/logout">Log out</a></li>
+          <li>You are <%= user.name %></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
