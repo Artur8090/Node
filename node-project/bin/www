@@ -23,12 +23,17 @@ app.set('port', port);
 var server = http.createServer(app);
 
 const io = require('socket.io')(server)
-io.use(function(socket, next){
-  sessionMiddleware(socket.request, socket.request.res, next)
-})
+io.use(function(socket, next) {
+  sessionMiddleware(socket.request, socket.request.res || {}, next);
+});
 io.on('connection', function(socket){
   const user = socket.request.session.user;
   console.log(`A User ${user} Connected`)
+  socket.on('message', function(data){
+    console.log(`A User ${user.name} sent message: ${data}`);
+    io.sockets.send({userName: user.name,text: data});
+
+  })
 })
 
 async function main() {

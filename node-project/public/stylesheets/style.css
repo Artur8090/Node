@@ -1,4 +1,10 @@
+@font-face {
+  font-family: 'National';
+  src: url("fonts/National_Park/NationalPark-VariableFont_wght.ttf");
+}
+
 body {
+
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -8,11 +14,28 @@ a {
 }
 
 header, footer {
+  font-family: 'National';
   background-color: ghostwhite;
   padding: 20px;
 }
+ul{
+  list-style-type: none;
 
+}
+a{
+  text-decoration: none;
+}
 main {
+  font-family: 'National';
   background-color: cornsilk;
   padding: 20px;
+}
+p{
+  color: red;
+}
+@media screen and (max-width: 400px) {
+    main{
+      width: fit-content;
+      height: 100%;
+    }
 }

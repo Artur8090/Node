@@ -85,12 +85,13 @@ app.use(function(req, res) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
   res.status(err.status || 500);
-  res.render('error', {status: err.status || 500, layout: './layouts/error-layout'});
+  res.render('error', {
+    message: err.message,           // ✅ Provide message
+    error: req.app.get('env') === 'development' ? err : {}, // ✅ Full error only in dev
+    status: err.status || 500,
+    layout: './layouts/error-layout'
+  });
 });
 
 module.exports = {app, sessionMiddleware};
