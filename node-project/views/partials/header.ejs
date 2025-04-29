@@ -1,17 +1,17 @@
-<header>
-    <h1><%= title %></h1>
-    <nav>
-      <ul class="menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <% if (!user) { %>
-          <li><a href="/users/reg">Register</a></li>
-          <li><a href="/users/authorization">Log in</a></li>
-        <% } else { %>
-          <li><a href="/users/chat">Chat</a></li>
-          <li><a href="/users/logout">Log out</a></li>
-          <li>You are <%= user.name %></li>
-        <% } %>
-      </ul>
-    </nav>
-  </header>
+<header class="header-container">
+  <h1><%= title %></h1>
+  <nav>
+    <ul class="menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <% if (!user) { %>
+        <li><a href="/users/reg">Register</a></li>
+        <li><a href="/users/authorization">Log in</a></li>
+      <% } else { %>
+        <li><a href="/users/chat">Chat</a></li>
+        <li><a href="/users/logout">Log out</a></li>
+        <li class="user-label">You are <%= user.name %></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
