@@ -4,38 +4,78 @@
     <script src="socket.io/socket.io.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TicTacToe</title>
 </head>
 <body>
     <style>
-        .board{
-            margin: auto;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 50px;
+            font-family: sans-serif;
+        }
+    
+        .chat {
+            width: 250px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+            padding: 5px;
+        }
+    
+        .chat input {
+            padding: 5px;
+            font-size: 1rem;
+        }
+    
+        .board {
             width: 490px;
         }
-        .board button{
+    
+        .board button {
             height: 150px;
             width: 150px;
             float: left;
             margin: 5px;
             font-size: 3rem;
         }
-        #message{
-            font-size: 3rem;
+    
+        #message {
+            font-size: 2rem;
             margin-bottom: 1rem;
             text-align: center;
         }
     </style>
-    <div id="message">Waiting for opponent</div>
-    <div class="board">
-        <button id="r0c0"></button>
-        <button id="r0c1"></button>
-        <button id="r0c2"></button>
-        <button id="r1c0"></button>
-        <button id="r1c1"></button>
-        <button id="r1c2"></button>
-        <button id="r2c0"></button>
-        <button id="r2c1"></button>
-        <button id="r2c2"></button>
+    
+    <div class="chat">
+        <div class="chat-messages" id="chatMessages"></div>
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+    </div>
+    
+    <div>
+        <div id="message">Waiting for opponent</div>
+        <div class="board">
+            <button id="r0c0"></button>
+            <button id="r0c1"></button>
+            <button id="r0c2"></button>
+            <button id="r1c0"></button>
+            <button id="r1c1"></button>
+            <button id="r1c2"></button>
+            <button id="r2c0"></button>
+            <button id="r2c1"></button>
+            <button id="r2c2"></button>
+        </div>
     </div>
 </body>
 <script src="script.js"></script>

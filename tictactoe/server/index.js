@@ -30,6 +30,21 @@ io.on('connection', function (socket){
             getOpponentSocket(socket).emit('opponent.left')
         }
     })
+    if(getOpponentSocket(socket)){
+        socket.emit('game.begin',{
+            symbol: players[socket.id].symbol,
+        })
+        getOpponentSocket(socket).emit('game.begin',{
+            symbol: players[getOpponentSocket(socket).id].symbol
+        })
+    }
+    socket.on('chat.message', function(msg){
+        const opponentSocket = getOpponentSocket(socket);
+        if (opponentSocket) {
+            opponentSocket.emit('chat.message', msg);
+        }
+    });
+    
 })
 
 function joinPlayer(socket){
@@ -46,14 +61,7 @@ function joinPlayer(socket){
         unmatchedPlayerId = socket.id
     }
 }
-if(getOpponentSocket(socket)){
-    socket.emit('game.begin',{
-        symbol: players[socket.id].symbol,
-    })
-    getOpponentSocket(socket).emit('game.begin',{
-        symbol: players[getOpponentSocket(socket).id].symbol
-    })
-}
+
 function getOpponentSocket(socket){
     if(!players[socket.id].opponent){
         return
